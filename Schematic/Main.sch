@@ -19630,11 +19630,21 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <part name="R10" library="rcl" deviceset="R-EU_" device="0204/7" value="470R"/>
 <part name="C16" library="rcl" deviceset="C-EU" device="025-030X050" value="0.1uF"/>
 <part name="GND23" library="supply1" deviceset="GND" device=""/>
+<part name="SV6" library="con-lstb" deviceset="MA03-1" device=""/>
+<part name="P+21" library="supply1" deviceset="+5V" device=""/>
+<part name="GND24" library="supply1" deviceset="GND" device=""/>
+<part name="C18" library="rcl" deviceset="C-EU" device="025-030X050" value="0.1uF"/>
+<part name="GND27" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <text x="-53.34" y="15.24" size="1.778" layer="91" rot="R90">FP_SWITCH</text>
+<text x="-66.04" y="22.86" size="1.778" layer="91">TEMP</text>
+<text x="-55.88" y="-27.94" size="1.778" layer="91" rot="R90">CHSTAT</text>
+<text x="-7.62" y="76.2" size="1.778" layer="91">FAN</text>
+<text x="0" y="101.6" size="1.778" layer="91">LCD</text>
+<text x="-73.66" y="60.96" size="1.778" layer="91" rot="R90">PWRLED</text>
 </plain>
 <instances>
 <instance part="SV1" gate="G$1" x="0" y="88.9"/>
@@ -19741,6 +19751,11 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <instance part="R10" gate="G$1" x="-7.62" y="35.56" rot="R90"/>
 <instance part="C16" gate="G$1" x="-12.7" y="40.64" rot="R90"/>
 <instance part="GND23" gate="1" x="-17.78" y="40.64" rot="R270"/>
+<instance part="SV6" gate="G$1" x="-63.5" y="20.32" rot="R270"/>
+<instance part="P+21" gate="1" x="-68.58" y="12.7" rot="R90"/>
+<instance part="GND24" gate="1" x="-58.42" y="12.7" rot="R90"/>
+<instance part="C18" gate="G$1" x="-66.04" y="7.62" rot="R180"/>
+<instance part="GND27" gate="1" x="-66.04" y="2.54"/>
 </instances>
 <busses>
 </busses>
@@ -19822,6 +19837,12 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <segment>
 <pinref part="R9" gate="G$1" pin="2"/>
 <pinref part="P+19" gate="1" pin="+5V"/>
+</segment>
+<segment>
+<pinref part="SV6" gate="G$1" pin="1"/>
+<pinref part="P+21" gate="1" pin="+5V"/>
+<junction x="-66.04" y="12.7"/>
+<pinref part="C18" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="LCD_IO" class="0">
@@ -20020,6 +20041,16 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <pinref part="C16" gate="G$1" pin="1"/>
 <pinref part="GND23" gate="1" pin="GND"/>
 <junction x="-15.24" y="40.64"/>
+</segment>
+<segment>
+<pinref part="SV6" gate="G$1" pin="3"/>
+<pinref part="GND24" gate="1" pin="GND"/>
+<junction x="-60.96" y="12.7"/>
+</segment>
+<segment>
+<pinref part="C18" gate="G$1" pin="1"/>
+<pinref part="GND27" gate="1" pin="GND"/>
+<junction x="-66.04" y="5.08"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -20395,6 +20426,12 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <label x="-15.24" y="93.98" size="1.778" layer="95" rot="R90" xref="yes"/>
 <junction x="-12.7" y="88.9"/>
 </segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="RB3/AN9/CCP2/VPO"/>
+<wire x1="38.1" y1="15.24" x2="35.56" y2="15.24" width="0.1524" layer="91"/>
+<label x="38.1" y="15.24" size="1.778" layer="95" xref="yes"/>
+<junction x="35.56" y="15.24"/>
+</segment>
 </net>
 <net name="N$27" class="0">
 <segment>
@@ -20612,6 +20649,17 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <pinref part="C16" gate="G$1" pin="2"/>
 <junction x="-7.62" y="40.64"/>
 <pinref part="C16" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="N$30" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RA4/T0CKI/CIOUT/RCV"/>
+<wire x1="-35.56" y1="12.7" x2="-43.18" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="-43.18" y1="12.7" x2="-45.72" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="-45.72" y1="10.16" x2="-60.96" y2="10.16" width="0.1524" layer="91"/>
+<pinref part="SV6" gate="G$1" pin="2"/>
+<wire x1="-60.96" y1="10.16" x2="-63.5" y2="12.7" width="0.1524" layer="91"/>
+<junction x="-63.5" y="12.7"/>
 </segment>
 </net>
 </nets>
