@@ -19608,10 +19608,8 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <part name="C12" library="rcl" deviceset="C-EU" device="025-030X050" value="33pF"/>
 <part name="GND22" library="supply1" deviceset="GND" device=""/>
 <part name="IC5" library="Particulates" deviceset="AD780" device="" value="AD780"/>
-<part name="GND23" library="supply1" deviceset="GND" device=""/>
 <part name="P+17" library="supply1" deviceset="+5V" device=""/>
-<part name="GND24" library="supply1" deviceset="GND" device=""/>
-<part name="R8" library="pot" deviceset="TRIM_EU-" device="B25P"/>
+<part name="R8" library="pot" deviceset="TRIM_EU-" device="B25P" value="20k"/>
 <part name="GND25" library="supply1" deviceset="GND" device=""/>
 <part name="C13" library="rcl" deviceset="CPOL-EU" device="E2.5-5" value="10uF"/>
 <part name="C14" library="rcl" deviceset="CPOL-EU" device="E2.5-5" value="10uF"/>
@@ -19620,6 +19618,11 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <part name="AGND2" library="supply1" deviceset="AGND" device=""/>
 <part name="AGND3" library="supply1" deviceset="AGND" device=""/>
 <part name="AGND4" library="supply1" deviceset="AGND" device=""/>
+<part name="AGND5" library="supply1" deviceset="AGND" device=""/>
+<part name="AGND6" library="supply1" deviceset="AGND" device=""/>
+<part name="C15" library="rcl" deviceset="C-EU" device="025-030X050" value="0.1uF"/>
+<part name="AGND7" library="supply1" deviceset="AGND" device=""/>
+<part name="P+18" library="supply1" deviceset="+5V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -19709,9 +19712,7 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <instance part="C12" gate="G$1" x="-132.08" y="-17.78" rot="R270"/>
 <instance part="GND22" gate="1" x="-139.7" y="-17.78" rot="R270"/>
 <instance part="IC5" gate="G$1" x="-154.94" y="-20.32" rot="R270"/>
-<instance part="GND23" gate="1" x="-147.32" y="-5.08" rot="R180"/>
 <instance part="P+17" gate="1" x="-137.16" y="-7.62" rot="R270"/>
-<instance part="GND24" gate="1" x="-154.94" y="-5.08" rot="R180"/>
 <instance part="R8" gate="1" x="-154.94" y="-38.1" rot="R180"/>
 <instance part="GND25" gate="1" x="-154.94" y="-45.72"/>
 <instance part="C13" gate="G$1" x="-142.24" y="-7.62" rot="R270"/>
@@ -19721,6 +19722,11 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <instance part="AGND2" gate="VR1" x="-111.76" y="-35.56"/>
 <instance part="AGND3" gate="VR1" x="-116.84" y="96.52" rot="R90"/>
 <instance part="AGND4" gate="VR1" x="-106.68" y="-35.56"/>
+<instance part="AGND5" gate="VR1" x="-154.94" y="-5.08" rot="R180"/>
+<instance part="AGND6" gate="VR1" x="-147.32" y="-5.08" rot="R180"/>
+<instance part="C15" gate="G$1" x="-121.92" y="-38.1" rot="R180"/>
+<instance part="AGND7" gate="VR1" x="-121.92" y="-43.18"/>
+<instance part="P+18" gate="1" x="-124.46" y="-33.02" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -19791,6 +19797,13 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <junction x="-149.86" y="-7.62"/>
 <pinref part="C13" gate="G$1" pin="+"/>
 <junction x="-139.7" y="-7.62"/>
+</segment>
+<segment>
+<pinref part="IC4" gate="G$1" pin="AVCC"/>
+<pinref part="C15" gate="G$1" pin="2"/>
+<pinref part="P+18" gate="1" pin="+5V"/>
+<junction x="-121.92" y="-33.02"/>
+<pinref part="P+18" gate="1" pin="+5V"/>
 </segment>
 </net>
 <net name="LCD_IO" class="0">
@@ -19974,17 +19987,6 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <pinref part="GND22" gate="1" pin="GND"/>
 <junction x="-137.16" y="-17.78"/>
 <junction x="-137.16" y="-12.7"/>
-</segment>
-<segment>
-<pinref part="IC5" gate="G$1" pin="GND"/>
-<pinref part="GND23" gate="1" pin="GND"/>
-<junction x="-147.32" y="-7.62"/>
-<pinref part="C13" gate="G$1" pin="-"/>
-</segment>
-<segment>
-<pinref part="IC5" gate="G$1" pin="SEL"/>
-<pinref part="GND24" gate="1" pin="GND"/>
-<junction x="-154.94" y="-7.62"/>
 </segment>
 <segment>
 <pinref part="R8" gate="1" pin="E"/>
@@ -20532,6 +20534,42 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <pinref part="IC4" gate="G$1" pin="BIASLO"/>
 <pinref part="AGND4" gate="VR1" pin="AGND"/>
 <junction x="-106.68" y="-33.02"/>
+</segment>
+<segment>
+<pinref part="IC5" gate="G$1" pin="SEL"/>
+<pinref part="AGND5" gate="VR1" pin="AGND"/>
+<junction x="-154.94" y="-7.62"/>
+</segment>
+<segment>
+<pinref part="IC5" gate="G$1" pin="GND"/>
+<pinref part="C13" gate="G$1" pin="-"/>
+<pinref part="AGND6" gate="VR1" pin="AGND"/>
+<junction x="-147.32" y="-7.62"/>
+<pinref part="AGND6" gate="VR1" pin="AGND"/>
+</segment>
+<segment>
+<pinref part="C15" gate="G$1" pin="1"/>
+<pinref part="AGND7" gate="VR1" pin="AGND"/>
+<junction x="-121.92" y="-40.64"/>
+</segment>
+</net>
+<net name="CH2_IOUT" class="0">
+<segment>
+<pinref part="IC4" gate="G$1" pin="AIN3"/>
+<wire x1="-96.52" y1="-33.02" x2="-96.52" y2="-35.56" width="0.1524" layer="91"/>
+<label x="-96.52" y="-35.56" size="1.778" layer="95" rot="R270" xref="yes"/>
+</segment>
+</net>
+<net name="CH1_IOUT" class="0">
+<segment>
+<pinref part="IC4" gate="G$1" pin="AIN1"/>
+<wire x1="-86.36" y1="-33.02" x2="-86.36" y2="-35.56" width="0.1524" layer="91"/>
+<label x="-86.36" y="-35.56" size="1.778" layer="95" rot="R270" xref="yes"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="VOUT"/>
+<wire x1="5.08" y1="-116.84" x2="5.08" y2="-114.3" width="0.1524" layer="91"/>
+<label x="5.08" y="-116.84" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 </net>
 </nets>
