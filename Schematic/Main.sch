@@ -19661,7 +19661,7 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <plain>
 <text x="-53.34" y="15.24" size="1.778" layer="91" rot="R90">FP_SWITCH</text>
 <text x="-66.04" y="22.86" size="1.778" layer="91">TEMP</text>
-<text x="-55.88" y="-27.94" size="1.778" layer="91" rot="R90">CHSTAT</text>
+<text x="-55.88" y="-27.94" size="1.778" layer="91" rot="R90">CHLEDS</text>
 <text x="-7.62" y="76.2" size="1.778" layer="91">FAN</text>
 <text x="0" y="101.6" size="1.778" layer="91">LCD</text>
 <text x="-73.66" y="60.96" size="1.778" layer="91" rot="R90">PWRLED</text>
@@ -20693,6 +20693,22 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <wire x1="-35.56" y1="-15.24" x2="-38.1" y2="-15.24" width="0.1524" layer="91"/>
 <label x="-38.1" y="-15.24" size="1.778" layer="95" rot="R180" xref="yes"/>
 <junction x="-35.56" y="-15.24"/>
+</segment>
+</net>
+<net name="CH2_VOUT" class="0">
+<segment>
+<pinref part="IC4" gate="G$1" pin="AIN2"/>
+<wire x1="-91.44" y1="-33.02" x2="-91.44" y2="-35.56" width="0.1524" layer="91"/>
+<label x="-91.44" y="-35.56" size="1.778" layer="95" rot="R270" xref="yes"/>
+<junction x="-91.44" y="-33.02"/>
+</segment>
+</net>
+<net name="CH1_VOUT" class="0">
+<segment>
+<pinref part="IC4" gate="G$1" pin="AIN0"/>
+<wire x1="-81.28" y1="-33.02" x2="-81.28" y2="-35.56" width="0.1524" layer="91"/>
+<label x="-81.28" y="-35.56" size="1.778" layer="95" rot="R270" xref="yes"/>
+<junction x="-81.28" y="-33.02"/>
 </segment>
 </net>
 </nets>
