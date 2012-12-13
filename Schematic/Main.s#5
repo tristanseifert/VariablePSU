@@ -20411,11 +20411,6 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 </net>
 <net name="FAN_PWM" class="0">
 <segment>
-<pinref part="IC1" gate="G$1" pin="RC2/CCP1/P1A"/>
-<wire x1="-35.56" y1="-15.24" x2="-38.1" y2="-15.24" width="0.1524" layer="91"/>
-<label x="-38.1" y="-15.24" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
 <pinref part="T1" gate="G$1" pin="B"/>
 <wire x1="-25.4" y1="91.44" x2="-25.4" y2="88.9" width="0.1524" layer="91"/>
 <label x="-25.4" y="91.44" size="1.778" layer="95" rot="R90" xref="yes"/>
@@ -20676,6 +20671,22 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <pinref part="D4" gate="G$1" pin="A"/>
 <pinref part="GNDI4" gate="G$1" pin="GNDI"/>
 <junction x="5.08" y="-83.82"/>
+</segment>
+</net>
+<net name="PWM2" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RB3/AN9/CCP2/VPO"/>
+<wire x1="38.1" y1="15.24" x2="35.56" y2="15.24" width="0.1524" layer="91"/>
+<label x="38.1" y="15.24" size="1.778" layer="95" xref="yes"/>
+<junction x="35.56" y="15.24"/>
+</segment>
+</net>
+<net name="PWM1" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RC2/CCP1/P1A"/>
+<wire x1="-35.56" y1="-15.24" x2="-38.1" y2="-15.24" width="0.1524" layer="91"/>
+<label x="-38.1" y="-15.24" size="1.778" layer="95" rot="R180" xref="yes"/>
+<junction x="-35.56" y="-15.24"/>
 </segment>
 </net>
 </nets>

@@ -19661,7 +19661,7 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <plain>
 <text x="-53.34" y="15.24" size="1.778" layer="91" rot="R90">FP_SWITCH</text>
 <text x="-66.04" y="22.86" size="1.778" layer="91">TEMP</text>
-<text x="-55.88" y="-27.94" size="1.778" layer="91" rot="R90">CHSTAT</text>
+<text x="-55.88" y="-27.94" size="1.778" layer="91" rot="R90">CHLEDS</text>
 <text x="-7.62" y="76.2" size="1.778" layer="91">FAN</text>
 <text x="0" y="101.6" size="1.778" layer="91">LCD</text>
 <text x="-73.66" y="60.96" size="1.778" layer="91" rot="R90">PWRLED</text>
@@ -20415,6 +20415,12 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <wire x1="-25.4" y1="91.44" x2="-25.4" y2="88.9" width="0.1524" layer="91"/>
 <label x="-25.4" y="91.44" size="1.778" layer="95" rot="R90" xref="yes"/>
 <junction x="-25.4" y="88.9"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="RE2/AN7/OESPP"/>
+<wire x1="-35.56" y1="2.54" x2="-38.1" y2="2.54" width="0.1524" layer="91"/>
+<label x="-38.1" y="2.54" size="1.778" layer="95" rot="R180" xref="yes"/>
+<junction x="-35.56" y="2.54"/>
 </segment>
 </net>
 <net name="FAN_SPD" class="0">
