@@ -451,6 +451,14 @@ MAX3223-MAX3243.pdf</description>
 </gates>
 <devices>
 <device name="" package="SOP08">
+<connects>
+<connect gate="G$1" pin="GND" pad="4"/>
+<connect gate="G$1" pin="SEL" pad="8"/>
+<connect gate="G$1" pin="TEMP" pad="3"/>
+<connect gate="G$1" pin="TRIM" pad="5"/>
+<connect gate="G$1" pin="VIN" pad="2"/>
+<connect gate="G$1" pin="VOUT" pad="6"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>

@@ -327,7 +327,7 @@ MAX3223-MAX3243.pdf</description>
 <pin name="VIN" x="-12.7" y="5.08" length="middle" direction="pwr"/>
 <pin name="GND" x="-12.7" y="7.62" length="middle" direction="pwr"/>
 <pin name="VOUT" x="12.7" y="-7.62" length="middle" direction="out" rot="R180"/>
-<pin name="P$4" x="-12.7" y="-7.62" length="middle"/>
+<pin name="TRIM" x="-12.7" y="-7.62" length="middle"/>
 <pin name="TEMP" x="-12.7" y="-5.08" length="middle"/>
 </symbol>
 </symbols>

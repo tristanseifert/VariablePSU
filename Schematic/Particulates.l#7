@@ -430,12 +430,12 @@ MAX3223-MAX3243.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="AD780">
+<deviceset name="AD780" prefix="IC" uservalue="yes">
 <description>&lt;h1&gt;2.5V/3V Voltage Reference&lt;/h1&gt;</description>
 <gates>
 </gates>
 <devices>
-<device name="">
+<device name="" package="SOP08">
 <technologies>
 <technology name=""/>
 </technologies>
