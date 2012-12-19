@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "VariablePSU_Firmware", "VariablePSU_Firmware\VariablePSU_Firmware.cproj", "{ED373887-728A-41F6-BDDB-1F21B42493ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED373887-728A-41F6-BDDB-1F21B42493ED}.Debug|AVR.ActiveCfg = Debug|AVR
+		{ED373887-728A-41F6-BDDB-1F21B42493ED}.Debug|AVR.Build.0 = Debug|AVR
+		{ED373887-728A-41F6-BDDB-1F21B42493ED}.Release|AVR.ActiveCfg = Release|AVR
+		{ED373887-728A-41F6-BDDB-1F21B42493ED}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
