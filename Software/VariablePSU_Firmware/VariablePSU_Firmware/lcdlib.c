@@ -27,22 +27,24 @@ void LCD_WriteByteToLCD(uint8_t byte, uint8_t flags) {
 	LCD_PORT |= LCD_CLK_BITMASK; // Make sure CLK is high
 	LCD_PORT &= ~LCD_STB_BITMASK; // Set LCD enable pin to 0.
 	
+	flags |= 0xF8; // First 5 bits are 1's
+	
 	// Loop to write the flag
-	for (uint8_t i = 0; i < 8; i++) {
+	for (volatile uint8_t i = 0; i < 8; i++) {
 		_delay_us(100); // Wait 100 microseconds for the VFD.
-		LCD_PORT ^= ((flags & 0x01) << LCD_SIO) + LCD_CLK_BITMASK; // Shift out a single bit, toggle the state of clk as well. (it's low now)
+		LCD_PORT ^= (((flags & 0x80) >> 0x07) << LCD_SIO) + LCD_CLK_BITMASK; // Shift out a single bit, toggle the state of clk as well. (it's low now)
 		_delay_us(100); // Wait 100 microseconds for the VFD.
 		LCD_PORT ^= LCD_CLK_BITMASK; // Toggle clk again (It's high again)	
-		flags = flags >> 0x01; // Shift byte to the right 1 bit.
+		flags = flags << 0x01; // Shift byte to the left 1 bit.
 	}
 	
 	// Loop to transfer the bytes
-	for(uint8_t i = 0; i < 7; i++) {
+	for(volatile uint8_t i = 0; i < 7; i++) {
 		_delay_us(100); // Wait 100 microseconds for the VFD.
-		LCD_PORT ^= ((byte & 0x01) << LCD_SIO) + LCD_CLK_BITMASK; // Shift out a single bit, toggle the state of clk as well. (it's low now)
+		LCD_PORT ^= (((byte & 0x80) >> 0x07) << LCD_SIO) + LCD_CLK_BITMASK; // Shift out a single bit, toggle the state of clk as well. (it's low now)
 		_delay_us(100); // Wait 100 microseconds for the VFD.
 		LCD_PORT ^= LCD_CLK_BITMASK; // Toggle clk again (It's high again)
-		byte = byte >> 0x01; // Shift byte to the right 1 bit.		
+		byte = byte << 0x01; // Shift byte to the left 1 bit.		
 	}
 	
 	LCD_PORT ^= (LCD_STB_BITMASK); // Make STB high again
@@ -55,27 +57,36 @@ void LCD_WriteByteToLCD(uint8_t byte, uint8_t flags) {
 /* Initialises IO ports for the VFD										*/
 /************************************************************************/
 void LCD_InitIO() {
-	
+	// Configure all three pins the LCD uses as outputs.
+	LCD_DDR |= LCD_STB_BITMASK | LCD_CLK_BITMASK | LCD_SIO_BITMASK;
 }
 
 /************************************************************************/
 /* Initialises the VFD with the specified brightness.					*/
 /************************************************************************/
 void LCD_Init(uint8_t brightness) {
+	brightness &= 0x03;
 	
+	// Init LCD in 2 line mode, with specified brightness
+	LCD_WriteByteToLCD(0x38 | brightness, 0x00);
+	
+	// Set the cursor movement and autoincrement
+	LCD_WriteByteToLCD(0x06, 0x00);
 }
 
 /************************************************************************/
 /* Resets the VFD's controller.											*/
 /************************************************************************/
 void LCD_ResetLCD() {
-	
+	LCD_Init(0);
+	LCD_ClearScreen();
 }
 
 /************************************************************************/
 /* Clears the entire screen and resets cursor to (0, 0).				*/
 /************************************************************************/
 void LCD_ClearScreen() {
+	LCD_WriteByteToLCD(0x01, 0x00);
 	LCD_CursorHome(); // reset cursor to (0, 0).
 }
 
@@ -83,15 +94,41 @@ void LCD_ClearScreen() {
 /************************************************************************/
 /* Puts text from RAM to the current cursor position.					*/
 /************************************************************************/
-void LCD_PutText(char *text) {
+void LCD_PutText(uint8_t x, uint8_t y, char *text) {
+	// Make sure y is in range
+	y &= 0x03;
 	
+	// Calculate DD-RAM loc (y * 0x40, plus x)
+	uint8_t ddramloc = (y << 0x06) + x;
+	
+	// Write DD-RAM address
+	LCD_WriteByteToLCD(0x80 | ddramloc, 0x00);
+	
+	// Do we have more text to write?
+	while(text != 0x00) {
+		// Write next character. (RS = 1, RW = 0)
+		LCD_WriteByteToLCD((uint8_t) text++, 0x02);
+	}
 }
 
 /************************************************************************/
 /* Puts text from PROGMEM to the current cursor position.				*/
 /************************************************************************/
-void LCD_PutText_P(char *text) {
+void LCD_PutText_P(uint8_t x, uint8_t y, char *text) {
+	// Make sure y is in range
+	y &= 0x03;
 	
+	// Calculate DD-RAM loc (y * 0x40, plus x)
+	uint8_t ddramloc = (y << 0x06) + x;
+	
+	// Write DD-RAM address
+	LCD_WriteByteToLCD(0x80 | ddramloc, 0x00);
+	
+	// Do we have more text to write?
+	while(pgm_read_byte(text) != 0x00) {
+		// Write next character. (RS = 1, RW = 0)
+		LCD_WriteByteToLCD(pgm_read_byte(text++), 0x02);
+	}	
 }
 
 
@@ -99,14 +136,25 @@ void LCD_PutText_P(char *text) {
 /* Puts a character from RAM to a specific on-screen position.			*/
 /************************************************************************/
 void LCD_PutChar(uint8_t x, uint8_t y, char character) {
+	// Make sure y is in range
+	y &= 0x03;
 	
+	// Calculate DD-RAM loc (y * 0x40, plus x)
+	uint8_t ddramloc = (y << 0x06) + x; 
+	
+	// Write DD-RAM address
+	LCD_WriteByteToLCD(0x80 | ddramloc, 0x00);
+	
+	// Write character to DD-RAM (RS is set to 1, RW set 0)
+	LCD_WriteByteToLCD(character, 0x02);
 }
 
 /************************************************************************/
 /* Puts a character from PROGMEM to a specific on-screen position.		*/
 /************************************************************************/
 void LCD_PutChar_P(uint8_t x, uint8_t y, char character) {
-	
+	// Just call the RAM version of this routine.
+	LCD_PutChar(x, y, pgm_read_byte(character));
 }	
 
 
@@ -114,7 +162,16 @@ void LCD_PutChar_P(uint8_t x, uint8_t y, char character) {
 /* Sets a specific custom character in CG-RAM from PROGMEM.				*/
 /************************************************************************/
 void LCD_SetCGRAM(uint8_t character, char *data) {
+	// Make sure value is in range
+	character &= 0x07;
 	
+	// Write the CGRAM address
+	LCD_WriteByteToLCD(0x40 | (character << 0x03), 0x00);
+	
+	for (volatile uint8_t i = 0; i < 8; i++) {
+		// Write a character of the CGRAM data (RS = 1, RW = 0)
+		LCD_WriteByteToLCD(pgm_read_byte(data++), 0x02);
+	}
 }
 
 
@@ -122,14 +179,14 @@ void LCD_SetCGRAM(uint8_t character, char *data) {
 /* Resets the cursor to the home position, (0,0).						*/
 /************************************************************************/
 void LCD_CursorHome() {
-	
+	LCD_WriteByteToLCD(0x02, 0x00);
 }
 
 /************************************************************************/
 /* Sets the cursor's position to the specified X and Y coordinates.		*/
 /************************************************************************/
 void LCD_SetCursorPos(uint8_t x, uint8_t y) {
-	
+	// TODO: Implement	
 }
 
 /************************************************************************/
@@ -137,5 +194,5 @@ void LCD_SetCursorPos(uint8_t x, uint8_t y) {
 /* display, and the cursor blinking.									*/
 /************************************************************************/
 void LCD_SetDisplayState(uint8_t dispOn, uint8_t cursorOn, uint8_t cursorBlink) {
-	
+	LCD_WriteByteToLCD(0x08 | ((dispOn & 0x01) << 0x02) | ((cursorOn & 0x01) << 0x01) | (cursorBlink & 0x01), 0x00);
 }

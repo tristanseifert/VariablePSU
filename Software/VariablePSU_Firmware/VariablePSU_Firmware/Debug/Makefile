@@ -35,8 +35,10 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../ds18x20lib.c \
 ../lcdlib.c \
-../main.c
+../main.c \
+../rotary.c
 
 
 PREPROCESSING_SRCS += 
@@ -46,23 +48,31 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+ds18x20lib.o \
 lcdlib.o \
-main.o
+main.o \
+rotary.o
 
 
 OBJS_AS_ARGS +=  \
+ds18x20lib.o \
 lcdlib.o \
-main.o
+main.o \
+rotary.o
 
 
 C_DEPS +=  \
+ds18x20lib.d \
 lcdlib.d \
-main.d
+main.d \
+rotary.d
 
 
 C_DEPS_AS_ARGS +=  \
+ds18x20lib.d \
 lcdlib.d \
-main.d
+main.d \
+rotary.d
 
 
 OUTPUT_FILE_PATH +=VariablePSU_Firmware.elf
@@ -74,6 +84,10 @@ ADDITIONAL_DEPENDENCIES:=
 OUTPUT_FILE_DEP:= ./makedep.mk
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 
