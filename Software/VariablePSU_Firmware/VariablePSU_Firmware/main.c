@@ -27,8 +27,8 @@ unsigned char temp_case_str[8];
 float temp_case;
 
 // 128 byte read buffer
-unsigned char readBuffer[128];
-uint8_t curReadBuffPos;
+unsigned char UART0_readBuffer[128];
+uint8_t UART0_curReadBuffPos;
 
 /************************************************************************/
 /* Main routine															*/
@@ -48,7 +48,10 @@ int main(void) {
 void InitIOPorts() {
 	// Initialize the LCD IO ports
 	LCD_InitIO();
+	
 	InitUART();
+	InitSPI();
+	InitInterrupts();
 	
 	// Initialise our rotary encoder; takes care of setting the timer.
 	rotary_init();
@@ -64,6 +67,7 @@ void InitIOPorts() {
 	PORTA |= (1 << PA4) | (1 << PA5) | (1 << PA6) | (1 << PA7); // pull-ups on switch inputs
 	DDRA |= (1 << PA4) | (1 << PA5) | (1 << PA6) | (1 << PA7); // switch inputs
 	
+	DDRB &= ~(1 << PB1); // Make sure PB1 (!ADC_RDY!) is an input.
 	// Initialise temperature sensors
 	ds1820_init(TEMP_CASE_PIN);
 	
@@ -86,14 +90,38 @@ void InitUART() {
 	UCSR0B |= (1 << RXCIE0);
 }
 
+void InitSPI() {
+	SPCR = (1 << SPE) | (1 << MSTR) | (1 << SPR0); // Enable SPI with SCK = FCK/16
+	DDRB |= (1 << PB7) | (1 << PB5); // SCK and MOSI as outputs
+}
+
+void InitInterrupts() {
+	PCMSK1 |= (1 << PINB1); // Enable pin B1 on-change interrupt
+	PCICR |= 0x02; // Enable interrupts for pins 9-16.
+}
+
+/************************************************************************/
+/* Voltage/current measurement stuff									*/
+/************************************************************************/
+
+// Called when there is a state change in the !ADC_RDY! input.
+ISR(PCINT1_vect, ISR_BLOCK) {
+	// We have data ready.
+	if(PORTB & (1 << PINB1) == 0) {
+		
+	} else {
+		// The input transitioned back to high -- ignore this.
+	}
+}
+
 /************************************************************************/
 /* USART Interrupt Handler Routines	(For receive)						*/
 /************************************************************************/
 
 ISR(USART0_RX_vect, ISR_BLOCK) {
 	// Read a byte from the FIFO into our buffer, increment counter.
-	readBuffer[curReadBuffPos] = UDR0;
-	curReadBuffPos++;
+	UART0_readBuffer[UART0_curReadBuffPos] = UDR0;
+	UART0_curReadBuffPos++;
 }
 
 /************************************************************************/
@@ -117,6 +145,36 @@ void USART_SendChars_P(char *string) {
 void USART_SendChars(char *string) {
 	while(*string != 0x00) {
 		USART_SendByte(*string++);
+	}
+}
+
+/************************************************************************/
+/* SPI Interface Routines												*/
+/************************************************************************/
+
+char SPI_ReceiveChar(void) {
+	// Wait for reception complete
+	while(!(SPSR & (1<<SPIF)));
+	// Return Data Register
+	return SPDR;
+}
+
+void SPI_SendChar(char cData) {
+	// Start transmission
+	SPDR = cData;
+	// Wait for the transmission to complete
+	while(! (SPSR & (1 << SPIF)));
+}
+
+void SPI_SendChars(char *string) {
+	while(*string != 0x00) {
+		SPI_SendChar(string++);
+	}
+}
+
+void SPI_SendChars_P(char *string) {
+	while(pgm_read_byte(string) != 0x00) {
+		SPI_SendChar(pgm_read_byte(string++));
 	}
 }
 
