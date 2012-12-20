@@ -19603,6 +19603,12 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <part name="SV9" library="con-lstb" deviceset="MA03-2" device=""/>
 <part name="SV10" library="con-lstb" deviceset="MA03-1" device=""/>
 <part name="GNDI11" library="supply1" deviceset="GND" device=""/>
+<part name="C4" library="rcl" deviceset="CPOL-EU" device="E2.5-5" value="10uF"/>
+<part name="C16" library="rcl" deviceset="CPOL-EU" device="E2.5-5" value="10uF"/>
+<part name="C24" library="rcl" deviceset="CPOL-EU" device="E2.5-5" value="10uF"/>
+<part name="C33" library="rcl" deviceset="CPOL-EU" device="E2.5-5" value="10uF"/>
+<part name="P+24" library="supply1" deviceset="+5V" device=""/>
+<part name="GNDI12" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -19776,6 +19782,12 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <instance part="SV9" gate="1" x="-104.14" y="-129.54" rot="R180"/>
 <instance part="SV10" gate="G$1" x="-101.6" y="-86.36" rot="R270"/>
 <instance part="GNDI11" gate="1" x="-99.06" y="-96.52"/>
+<instance part="C4" gate="G$1" x="-121.92" y="-109.22" rot="R90"/>
+<instance part="C16" gate="G$1" x="-160.02" y="-111.76" rot="R90"/>
+<instance part="C24" gate="G$1" x="-160.02" y="-121.92" rot="R90"/>
+<instance part="C33" gate="G$1" x="-119.38" y="-114.3" rot="R270"/>
+<instance part="P+24" gate="1" x="-114.3" y="-109.22" rot="R270"/>
+<instance part="GNDI12" gate="1" x="-114.3" y="-114.3" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -19888,6 +19900,11 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="SV8" gate="1" pin="9"/>
 <pinref part="P+19" gate="1" pin="+5V"/>
 <junction x="50.8" y="-25.4"/>
+</segment>
+<segment>
+<pinref part="C4" gate="G$1" pin="-"/>
+<pinref part="P+24" gate="1" pin="+5V"/>
+<junction x="-116.84" y="-109.22"/>
 </segment>
 </net>
 <net name="LCD_IO" class="0">
@@ -20079,6 +20096,11 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="SV10" gate="G$1" pin="3"/>
 <pinref part="GNDI11" gate="1" pin="GND"/>
 <junction x="-99.06" y="-93.98"/>
+</segment>
+<segment>
+<pinref part="C33" gate="G$1" pin="+"/>
+<pinref part="GNDI12" gate="1" pin="GND"/>
+<junction x="-116.84" y="-114.3"/>
 </segment>
 </net>
 <net name="V+" class="0">
@@ -21221,6 +21243,56 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <wire x1="-101.6" y1="-96.52" x2="-101.6" y2="-93.98" width="0.1524" layer="91"/>
 <label x="-101.6" y="-96.52" size="1.778" layer="95" rot="R270" xref="yes"/>
 <junction x="-101.6" y="-93.98"/>
+</segment>
+</net>
+<net name="N$37" class="0">
+<segment>
+<pinref part="IC7" gate="G$1" pin="C2-"/>
+<pinref part="C24" gate="G$1" pin="-"/>
+<junction x="-154.94" y="-121.92"/>
+</segment>
+</net>
+<net name="N$38" class="0">
+<segment>
+<pinref part="IC7" gate="G$1" pin="C1-"/>
+<pinref part="C16" gate="G$1" pin="-"/>
+<junction x="-154.94" y="-111.76"/>
+</segment>
+</net>
+<net name="N$45" class="0">
+<segment>
+<pinref part="IC7" gate="G$1" pin="C2+"/>
+<wire x1="-154.94" y1="-116.84" x2="-165.1" y2="-116.84" width="0.1524" layer="91"/>
+<wire x1="-165.1" y1="-116.84" x2="-165.1" y2="-121.92" width="0.1524" layer="91"/>
+<pinref part="C24" gate="G$1" pin="+"/>
+<wire x1="-165.1" y1="-121.92" x2="-162.56" y2="-121.92" width="0.1524" layer="91"/>
+<junction x="-162.56" y="-121.92"/>
+<junction x="-154.94" y="-116.84"/>
+</segment>
+</net>
+<net name="N$48" class="0">
+<segment>
+<pinref part="IC7" gate="G$1" pin="C1+"/>
+<wire x1="-154.94" y1="-106.68" x2="-165.1" y2="-106.68" width="0.1524" layer="91"/>
+<wire x1="-165.1" y1="-106.68" x2="-165.1" y2="-111.76" width="0.1524" layer="91"/>
+<pinref part="C16" gate="G$1" pin="+"/>
+<wire x1="-165.1" y1="-111.76" x2="-162.56" y2="-111.76" width="0.1524" layer="91"/>
+<junction x="-154.94" y="-106.68"/>
+<junction x="-162.56" y="-111.76"/>
+</segment>
+</net>
+<net name="N$49" class="0">
+<segment>
+<pinref part="IC7" gate="G$1" pin="V-"/>
+<pinref part="C33" gate="G$1" pin="-"/>
+<junction x="-124.46" y="-114.3"/>
+</segment>
+</net>
+<net name="N$50" class="0">
+<segment>
+<pinref part="IC7" gate="G$1" pin="V+"/>
+<pinref part="C4" gate="G$1" pin="+"/>
+<junction x="-124.46" y="-109.22"/>
 </segment>
 </net>
 </nets>

@@ -19895,6 +19895,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <segment>
 <pinref part="IC1" gate="G$1" pin="AVCC"/>
 <pinref part="P+4" gate="1" pin="+5V"/>
+<junction x="30.48" y="-2.54"/>
 </segment>
 <segment>
 <pinref part="SV8" gate="1" pin="9"/>
@@ -20198,7 +20199,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <junction x="-55.88" y="-17.78"/>
 </segment>
 </net>
-<net name="N$9" class="0">
+<net name="ROT_B" class="0">
 <segment>
 <wire x1="50.8" y1="10.16" x2="30.48" y2="10.16" width="0.1524" layer="91"/>
 <pinref part="SV3" gate="1" pin="2"/>
@@ -20207,7 +20208,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <junction x="30.48" y="10.16"/>
 </segment>
 </net>
-<net name="N$10" class="0">
+<net name="ROT_BTN" class="0">
 <segment>
 <wire x1="30.48" y1="7.62" x2="50.8" y2="7.62" width="0.1524" layer="91"/>
 <pinref part="SV3" gate="1" pin="3"/>
@@ -20225,7 +20226,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <junction x="30.48" y="5.08"/>
 </segment>
 </net>
-<net name="N$12" class="0">
+<net name="ROT_A" class="0">
 <segment>
 <wire x1="50.8" y1="12.7" x2="30.48" y2="12.7" width="0.1524" layer="91"/>
 <pinref part="SV3" gate="1" pin="1"/>
@@ -20441,6 +20442,12 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="IC4" gate="G$1" pin="!RDY!"/>
 <wire x1="-101.6" y1="38.1" x2="-101.6" y2="40.64" width="0.1524" layer="91"/>
 <label x="-101.6" y="40.64" size="1.778" layer="95" rot="R90" xref="yes"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="PCINT9/CLKO/T1_PB1"/>
+<wire x1="-30.48" y1="20.32" x2="-33.02" y2="20.32" width="0.1524" layer="91"/>
+<label x="-33.02" y="20.32" size="1.778" layer="95" rot="R180" xref="yes"/>
+<junction x="-30.48" y="20.32"/>
 </segment>
 </net>
 <net name="N$31" class="0">
@@ -21136,6 +21143,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="SV8" gate="1" pin="1"/>
 <wire x1="30.48" y1="-5.08" x2="50.8" y2="-5.08" width="0.1524" layer="91"/>
 <junction x="50.8" y="-5.08"/>
+<junction x="30.48" y="-5.08"/>
 </segment>
 </net>
 <net name="N$15" class="0">
@@ -21144,6 +21152,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="IC1" gate="G$1" pin="PCINT22/TOSC1_PC6"/>
 <wire x1="50.8" y1="-7.62" x2="30.48" y2="-7.62" width="0.1524" layer="91"/>
 <junction x="50.8" y="-7.62"/>
+<junction x="30.48" y="-7.62"/>
 </segment>
 </net>
 <net name="N$16" class="0">
@@ -21152,6 +21161,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="SV8" gate="1" pin="3"/>
 <wire x1="30.48" y1="-10.16" x2="50.8" y2="-10.16" width="0.1524" layer="91"/>
 <junction x="50.8" y="-10.16"/>
+<junction x="30.48" y="-10.16"/>
 </segment>
 </net>
 <net name="N$19" class="0">
@@ -21160,6 +21170,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="IC1" gate="G$1" pin="PCINT20/TDO_PC4"/>
 <wire x1="50.8" y1="-12.7" x2="30.48" y2="-12.7" width="0.1524" layer="91"/>
 <junction x="50.8" y="-12.7"/>
+<junction x="30.48" y="-12.7"/>
 </segment>
 </net>
 <net name="N$20" class="0">
@@ -21168,6 +21179,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="SV8" gate="1" pin="5"/>
 <wire x1="30.48" y1="-15.24" x2="50.8" y2="-15.24" width="0.1524" layer="91"/>
 <junction x="50.8" y="-15.24"/>
+<junction x="30.48" y="-15.24"/>
 </segment>
 </net>
 <net name="N$28" class="0">
@@ -21176,6 +21188,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="IC1" gate="G$1" pin="PCINT18/TCK_PC2"/>
 <wire x1="50.8" y1="-17.78" x2="30.48" y2="-17.78" width="0.1524" layer="91"/>
 <junction x="50.8" y="-17.78"/>
+<junction x="30.48" y="-17.78"/>
 </segment>
 </net>
 <net name="N$30" class="0">
@@ -21184,6 +21197,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="SV8" gate="1" pin="7"/>
 <wire x1="30.48" y1="-20.32" x2="50.8" y2="-20.32" width="0.1524" layer="91"/>
 <junction x="50.8" y="-20.32"/>
+<junction x="30.48" y="-20.32"/>
 </segment>
 </net>
 <net name="N$34" class="0">
@@ -21192,6 +21206,7 @@ Source: http://www.atmel.com/dyn/resources/prod_documents/doc2593.pdf</descripti
 <pinref part="IC1" gate="G$1" pin="PCINT16/SCL_PC0"/>
 <wire x1="50.8" y1="-22.86" x2="30.48" y2="-22.86" width="0.1524" layer="91"/>
 <junction x="50.8" y="-22.86"/>
+<junction x="30.48" y="-22.86"/>
 </segment>
 </net>
 <net name="N$35" class="0">
