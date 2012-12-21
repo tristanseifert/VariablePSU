@@ -1,2 +1,5 @@
 .DS_Store
 */.DS_Store
+*.d
+*.o
+Software/VariablePSU_Firmware/VariablePSU_Firmware/Debug

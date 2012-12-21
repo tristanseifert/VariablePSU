@@ -52,6 +52,7 @@ void InitIOPorts() {
 	InitUART();
 	InitSPI();
 	InitInterrupts();
+	InitPWMTimer();
 	
 	// Initialise our rotary encoder; takes care of setting the timer.
 	rotary_init();
@@ -74,6 +75,7 @@ void InitIOPorts() {
 	sei(); // Enable interrupts
 }	
 
+// Initialise UART0.
 void InitUART() {
 	int baud = 19200;
 	
@@ -90,14 +92,24 @@ void InitUART() {
 	UCSR0B |= (1 << RXCIE0);
 }
 
+// Initialise SPI in master mode.
 void InitSPI() {
 	SPCR = (1 << SPE) | (1 << MSTR) | (1 << SPR0); // Enable SPI with SCK = FCK/16
 	DDRB |= (1 << PB7) | (1 << PB5); // SCK and MOSI as outputs
 }
 
+// Initialise external ADC interrupt.
 void InitInterrupts() {
 	PCMSK1 |= (1 << PINB1); // Enable pin B1 on-change interrupt
 	PCICR |= 0x02; // Enable interrupts for pins 9-16.
+}
+
+// Initialise Timer2 for PWM of speaker and fan.
+void InitPWMTimer() {
+/*	// Set OC2B when up counting, toggle OC1B when TOP is reached.
+	TCCR2A = (1 << COM2A0) | (1 << COM2B0) | (1 << COM2B1) | (1 << WGM20);
+	// Prescaler Clk/256
+	TCCR2B = (1 << CS22) | (1 << CS21);*/
 }
 
 /************************************************************************/
