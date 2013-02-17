@@ -12,6 +12,7 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
+#include <avr/eeprom.h>
 #include <util/delay.h>
 
 #include <stdio.h>
@@ -35,6 +36,7 @@ uint8_t UART0_curReadBuffPos;
 /************************************************************************/
 
 int main(void) {
+	UpdateNumBoots();
 	InitIOPorts();
 	
     while(1) {
@@ -43,6 +45,14 @@ int main(void) {
 		_delay_ms(100);
         //TODO:: Please write your application code 
     }
+}
+
+// Updates EEPROM's boot count
+void UpdateNumBoots() {
+	uint32_t bootCount = 0x00;
+	bootCount = eeprom_read_dword(&EEPROM_bootupCount);
+	bootCount++;
+	eeprom_write_dword(&EEPROM_bootupCount, bootCount);
 }
 
 void InitIOPorts() {

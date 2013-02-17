@@ -5,6 +5,8 @@
  *  Author: Tristan Seifert
  */ 
 
+#include <stdint.h>
+#include <avr/eeprom.h>
 
 #ifndef MAIN_H_
 #define MAIN_H_
@@ -26,6 +28,8 @@
 #define SPI_CS_CH2 PB4
 
 #define TEMP_CASE_PIN PA3
+
+uint32_t EEMEM EEPROM_bootupCount = 0x00000000;
 
 void InitIOPorts();
 void InitUART();
